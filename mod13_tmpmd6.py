@@ -26,3 +26,24 @@ class TestProject3Inputs(unittest.TestCase):
         with patch('builtins.input', return_value='2'):
             choice = show_menu("Chart Types", ["Bar", "Line"])
             self.assertEqual(choice, 2)
+
+        # Menu selection for time series
+    def test_show_menu_time_series(self):
+        # Time Series menu: ["Intraday", "Daily", "Weekly", "Monthly"]
+        with patch('builtins.input', return_value='1'):
+            choice = show_menu(
+                "Select the Time Series",
+                ["Intraday", "Daily", "Weekly", "Monthly"]
+            )
+            self.assertEqual(choice, 1)
+        with patch('builtins.input', return_value='4'):
+            choice = show_menu(
+                "Select the Time Series",
+                ["Intraday", "Daily", "Weekly", "Monthly"]
+            )
+            self.assertEqual(choice, 4)
+
+    def test_show_menu_non_numeric_input(self):
+        with patch('builtins.input', return_value='x'):
+            with self.assertRaises(ValueError):
+                show_menu("Chart Types", ["Bar", "Line"])
