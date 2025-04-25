@@ -4,7 +4,7 @@ from utils import validate_date_range
 from main import show_menu
 
 class TestProject3Inputs(unittest.TestCase):
-    # Date‐range validation (start/end date)
+        # Date‐range validation (start/end date)
     def test_validate_date_range_valid(self):
         self.assertTrue(validate_date_range("2025-01-01", "2025-12-31"))
 
@@ -16,3 +16,13 @@ class TestProject3Inputs(unittest.TestCase):
     def test_validate_date_range_end_before_start(self):
         # end date earlier than start
         self.assertFalse(validate_date_range("2025-12-31", "2025-01-01"))
+
+        # Menu selection for chart type
+    def test_show_menu_chart_type(self):
+        # Chart Types menu: ["Bar", "Line"]
+        with patch('builtins.input', return_value='1'):
+            choice = show_menu("Chart Types", ["Bar", "Line"])
+            self.assertEqual(choice, 1)
+        with patch('builtins.input', return_value='2'):
+            choice = show_menu("Chart Types", ["Bar", "Line"])
+            self.assertEqual(choice, 2)
