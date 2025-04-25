@@ -47,3 +47,14 @@ class TestProject3Inputs(unittest.TestCase):
         with patch('builtins.input', return_value='x'):
             with self.assertRaises(ValueError):
                 show_menu("Chart Types", ["Bar", "Line"])
+
+    # Stock symbol formatting (must be uppercase, 1–7 letters)
+    def test_symbol_uppercase_and_length(self):
+        with patch('builtins.input', return_value='goog'):
+            symbol = input("\nEnter the stock symbol: ").upper()
+            self.assertEqual(symbol, "GOOG")
+            self.assertTrue(1 <= len(symbol) <= 7)
+            self.assertTrue(symbol.isalpha())
+
+if __name__ == "__main__":
+    unittest.main()
